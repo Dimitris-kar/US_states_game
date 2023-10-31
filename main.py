@@ -1,7 +1,10 @@
 from turtle import Turtle, Screen
+from button import Button
 
 import pandas
 import pandas as pd
+
+button = Button()
 
 # set up the screen parameters (background etc.)
 screen = Screen()
@@ -9,19 +12,13 @@ screen.title("U.S. States Game")
 screen.bgcolor('cadet blue')
 screen.bgpic("blank_states_img.gif")
 
+# read the csv file using pandas and create dataframe
+df = pd.read_csv("50_states.csv")
+
+
 turtle = Turtle()
 turtle.penup()
 turtle.hideturtle()
-
-# create a "start" button
-button = Turtle()
-winn = Screen()
-winn.addshape('button.gif')
-button.shape('button.gif')
-
-
-# read the csv file using pandas and create dataframe
-df = pd.read_csv("50_states.csv")
 
 
 def start_game(x, y):
