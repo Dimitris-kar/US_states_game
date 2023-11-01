@@ -1,3 +1,4 @@
+import time
 from turtle import Turtle, Screen
 from button import Button
 
@@ -31,14 +32,12 @@ def start_game(x, y):
         # ask the user to guess a state
         answer_state = screen.textinput(title="Guess the State", prompt="What's another State's name?").title()
 
-        if answer_state == "Exit":
-            missing_states = []
-            for state in df.state:
-                if state not in correct_answers:
-                    missing_states.append(state)
+        if answer_state == "Exit" or len(correct_answers) == 50:
+            missing_states = [state for state in df.state if state not in correct_answers]
             new_data = pandas.DataFrame(missing_states)
             new_data.to_csv("missing_states.csv")
             break
+
         # check if there is such state in U.S.A
         for state in df.state:
             if state == answer_state:
@@ -48,8 +47,10 @@ def start_game(x, y):
                 correct_answers.append(answer_state)
 
     # when the game ends
-    turtle.goto(-90, 270)
+
+    turtle.goto(-90, 0)
     turtle.write('GAME OVER', font=('Arial', 19, 'bold'))
+    time.sleep(1)
 
 
 # when the button clicked, start the game
